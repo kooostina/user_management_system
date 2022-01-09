@@ -1,10 +1,12 @@
 import "./App.css";
 import React, { Component } from "react";
-import LogIn from "./Pages/LogIn";
-import Employees from "./Pages/Employees";
-import Departments from "./Pages/Departments";
-import Error from "./Pages/Error";
+import LoginPage from "./Pages/LoginPage";
+import EmployeesPage from "./Pages/EmployeesPage";
+import DepartmentsPage from "./Pages/DepartmentsPage";
+import ErrorPage from "./Pages/ErrorPage";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
+import MainPage from "./Pages/MainPage";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 
 class App extends Component {
   render() {
@@ -16,10 +18,17 @@ class App extends Component {
           </div>
 
           <Switch>
-            <Route path="/" exact component={LogIn} />
-            <Route path="/departments" component={Departments} />
-            <Route path="/employees" component={Employees} />
-            <Route path="/error" component={Error} />
+            {/* <Route path="/" exact component={MainPage} /> */}
+            <Route path="/login" exact component={LoginPage} />
+            <ProtectedRoute path="/departments">
+              <DepartmentsPage></DepartmentsPage>
+            </ProtectedRoute>
+            <ProtectedRoute
+              path="/employees"
+              component={EmployeesPage}
+            ></ProtectedRoute>
+            <Route path="/error" component={ErrorPage} />
+            <Route exact path="*" component={LoginPage} />
           </Switch>
         </div>
       </Router>

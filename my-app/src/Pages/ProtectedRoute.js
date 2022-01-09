@@ -1,13 +1,16 @@
-import React, { Component } from "react";
-import { Route, Redirect } from 'react-router-dom';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import authService from "../services/auth.service";
 
-class ProtectedRoute extends Component {
-  render() {
-    return (
-      <Route/>
-    );
-  }
+function ProtectedRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        return authService.isAuthorized() ? children : <Redirect to="/login" />;
+      }}
+    />
+  );
 }
 
 export default ProtectedRoute;
-
