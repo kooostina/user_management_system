@@ -28,6 +28,11 @@ class LogIn extends Component {
       });
   };
 
+  onChangeInput = (e) => {
+    const name = e.target.name;
+    this.setState({ [name]: e.target.value });
+  };
+
   render() {
     const { isAuthorized } = this.state;
     // = const isAuthorized = this.state.isAuthorized;
@@ -44,10 +49,11 @@ class LogIn extends Component {
               <input
                 type="text"
                 placeholder="username"
+                name="username"
                 required
                 value={this.state.username}
                 className="form-control"
-                onChange={(e) => this.setState({ username: e.target.value })} //make a separate function
+                onChange={this.onChangeInput} //make a separate function
               />
             </div>
             <div className="form-group">
@@ -55,10 +61,11 @@ class LogIn extends Component {
               <input
                 type="password"
                 placeholder="password"
+                name="password"
                 required
                 value={this.state.password}
                 className="form-control"
-                onChange={(e) => this.setState({ password: e.target.value })}
+                onChange={this.onChangeInput}
               />
             </div>
             <div>
