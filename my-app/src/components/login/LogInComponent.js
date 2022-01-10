@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 
 class LogIn extends Component {
   state = {
-    isAuthorized: authService.isAuthorized(),
+    isAuthorized: authService.isAuthorized(), // on init
     error: null,
     isLoaded: false,
     username: "",
@@ -30,6 +30,8 @@ class LogIn extends Component {
 
   render() {
     const { isAuthorized } = this.state;
+    // = const isAuthorized = this.state.isAuthorized;
+
     return isAuthorized ? (
       <Redirect to="/departments" />
     ) : (
