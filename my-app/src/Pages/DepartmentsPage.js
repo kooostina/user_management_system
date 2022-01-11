@@ -5,6 +5,7 @@ import DepartmentsList from "../components/departments/DepartmentsList";
 class DepartmentsPage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       error: null,
       isLoaded: false,
@@ -15,11 +16,9 @@ class DepartmentsPage extends Component {
   initData() {
     DepartmentsService.getDepartments()
       .then((result) => {
-        console.log(result);
-
         this.setState({
           isLoaded: true,
-          items: result.departments,
+          items: result,
         });
       })
       .catch((error) => {
@@ -46,24 +45,10 @@ class DepartmentsPage extends Component {
       return items?.length ? (
         <DepartmentsList items={items}></DepartmentsList>
       ) : (
-        <div>No departments yet</div>
+        <div>No created departments yet</div>
       );
     }
   }
-  // clickHandler() {
-  //   console.log("Clicked!");
-  //   <Link href="./employees"></Link>;
-  // }
-
-  // render() {
-  //   return (
-  //     <div>
-  //       <div>
-  //         <button onClick={this.clickHandler}>See all employees</button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 }
 
 export default DepartmentsPage;

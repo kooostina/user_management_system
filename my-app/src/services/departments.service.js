@@ -11,25 +11,27 @@ const getDepartments = () => {
     },
   };
 
-  return fetch(`${baseUrl}/departments`, options).then((res) => {
-    console.log(res);
+  return fetch(`${baseUrl}/departments`, options).then(async (res) => {
     if (!res.ok) {
       throw new Error(res.statusText);
     }
-    return res.json();
-  });
 
-  // return Promise.resolve({
-  //   departments: [
-  //     { name: "aaaa", description: "bbbb" },
-  //     { name: "bbb", description: "ddd" },
-  //   ],
-  // });
+    const data = await res.json();
+    return data?.departments || [];
+  });
+};
+
+const getDepartmentById = (id) => {
+  // fake request for one item
+  return getDepartments().then((data) => {
+    return data.find((department) => department?.id === id);
+  });
 };
 
 export default Object.assign(
   {},
   {
     getDepartments,
+    getDepartmentById,
   }
 );

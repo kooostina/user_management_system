@@ -2,10 +2,10 @@ import "./App.css";
 import React, { Component } from "react";
 import LoginPage from "./Pages/LoginPage";
 import EmployeesPage from "./Pages/EmployeesPage";
+import DepartmentItemPage from "./Pages/DepartmentItemPage";
 import DepartmentsPage from "./Pages/DepartmentsPage";
 import ErrorPage from "./Pages/ErrorPage";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
-import MainPage from "./Pages/MainPage";
 import ProtectedRoute from "./Pages/ProtectedRoute";
 
 class App extends Component {
@@ -20,13 +20,20 @@ class App extends Component {
           <Switch>
             {/* <Route path="/" exact component={MainPage} /> */}
             <Route path="/login" exact component={LoginPage} />
-            <ProtectedRoute path="/departments">
+
+            <ProtectedRoute exact path="/departments">
               <DepartmentsPage></DepartmentsPage>
             </ProtectedRoute>
-            <ProtectedRoute
-              path="/employees"
+
+            <ProtectedRoute exact path="/departments/:departmentId/employees">
+              <DepartmentItemPage></DepartmentItemPage>
+            </ProtectedRoute>
+
+            {/* <ProtectedRoute
+              exact
+              path="/departments/:departmentId/employees"
               component={EmployeesPage}
-            ></ProtectedRoute>
+            ></ProtectedRoute> */}
             <Route path="/error" component={ErrorPage} />
             <Route exact path="*" component={LoginPage} />
           </Switch>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import DepartmentItem from "./DepartmentItem";
+import EmployeesItem from "./EmployeesItem";
 
-class DepartmentsList extends Component {
+class EmployeesList extends Component {
   constructor(props) {
     super(props);
 
@@ -16,11 +16,11 @@ class DepartmentsList extends Component {
     return (
       <ul>
         {items.map((item, idx) => (
-          <DepartmentItem item={item} key={item.id || idx}></DepartmentItem>
+          <EmployeesItem item={item} key={item.id || idx}></EmployeesItem>
         ))}
       </ul>
     );
   }
 }
 
-export default DepartmentsList;
+export default EmployeesList;
