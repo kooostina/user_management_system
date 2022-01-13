@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DepartmentItem from "./DepartmentItem";
+import DepartmentItem from "../department_item/DepartmentItem";
 
 class DepartmentsList extends Component {
   constructor(props) {

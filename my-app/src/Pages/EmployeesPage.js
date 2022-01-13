@@ -38,8 +38,6 @@ class Employees extends Component {
   render() {
     const { error, isLoaded, items } = this.state;
 
-    console.log(items);
-
     if (error) {
       // popup & redirect to login 401 / 403
       return <div>Error: {error.message}</div>;

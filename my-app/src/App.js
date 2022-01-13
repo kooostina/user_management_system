@@ -18,7 +18,6 @@ class App extends Component {
           </div>
 
           <Switch>
-            {/* <Route path="/" exact component={MainPage} /> */}
             <Route path="/login" exact component={LoginPage} />
 
             <ProtectedRoute exact path="/departments">
@@ -29,12 +28,8 @@ class App extends Component {
               <DepartmentItemPage></DepartmentItemPage>
             </ProtectedRoute>
 
-            {/* <ProtectedRoute
-              exact
-              path="/departments/:departmentId/employees"
-              component={EmployeesPage}
-            ></ProtectedRoute> */}
             <Route path="/error" component={ErrorPage} />
+
             <Route exact path="*" component={LoginPage} />
           </Switch>
         </div>

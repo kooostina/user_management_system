@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "../departments/DepartmentItem.css";
 import { withRouter, Link } from "react-router-dom";
 
-class DepartmentsItem extends Component {
+class DepartmentItem extends Component {
   constructor(props) {
     super(props);
 
@@ -33,4 +32,4 @@ class DepartmentsItem extends Component {
   }
 }
 
-export default withRouter(DepartmentsItem);
+export default withRouter(DepartmentItem);

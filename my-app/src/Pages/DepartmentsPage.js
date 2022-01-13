@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DepartmentsService from "../services/departments.service";
-import DepartmentsList from "../components/departments/DepartmentsList";
+import DepartmentsList from "../components/departments/departments_list/DepartmentsList";
 
 class DepartmentsPage extends Component {
   constructor(props) {
