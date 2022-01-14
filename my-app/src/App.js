@@ -28,9 +28,9 @@ class App extends Component {
               <DepartmentItemPage></DepartmentItemPage>
             </ProtectedRoute>
 
-            <Route path="/error" component={ErrorPage} />
+            {/* <Route path="/error" component={ErrorPage} /> */}
 
-            <Route exact path="*" component={LoginPage} />
+            <Route exact path="*" component={ErrorPage} />
           </Switch>
         </div>
       </Router>
