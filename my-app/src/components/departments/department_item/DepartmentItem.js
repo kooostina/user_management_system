@@ -1,30 +1,21 @@
 import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
+import constantsService from "../../../constants/constants.service";
 
 class DepartmentItem extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      item: props?.item,
-    };
-  }
-
-  showEmployees() {
-    console.log("Employees button clicked!");
-  }
-
   render() {
-    const { item } = this.state;
     const { url } = this.props.match;
 
     return (
       <li className="department-item">
-        <h2 className="department-name">{item?.name}</h2>
-        <p className="department-description">{item?.description}</p>
+        <h2 className="department-name">{this.props.item?.name}</h2>
+        <p className="department-description">{this.props.item?.description}</p>
         <button className="department-button">Delete</button>
         <button className="department-button">Edit</button>
-        <Link to={`${url}/${item?.id}/employees`} className="department-button">
+        <Link
+          to={constantsService.generateEmployeesUrl(url, this.props.item?.id)}
+          className="department-button"
+        >
           Employees
         </Link>
       </li>

@@ -1,37 +1,32 @@
 import Constants from "../constants/constants.service";
-import authService from "./auth.service";
+import { getToken } from "./auth.service";
+import { Component } from "react";
 
 const baseUrl = Constants.getBaseUrl();
+const options = {
+  method: "GET",
+  headers: {
+    authorization: getToken(),
+  },
+};
 
-const getDepartments = () => {
-  const options = {
-    method: "GET",
-    headers: {
-      authorization: authService.getToken(),
-    },
+export default class DepartmentsService extends Component {
+  getDepartments = () => {
+    return fetch(`${baseUrl}${Constants.DEPARTMENTS}`, options)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+
+        return res;
+      })
+      .then((res) => res.json())
+      .then((data) => data?.departments || []);
   };
 
-  return fetch(`${baseUrl}/departments`, options).then(async (res) => {
-    if (!res.ok) {
-      throw new Error(res.statusText);
-    }
-
-    const data = await res.json();
-    return data?.departments || [];
-  });
-};
-
-const getDepartmentById = (id) => {
-  // fake request for one item
-  return getDepartments().then((data) => {
-    return data.find((department) => department?.id === id);
-  });
-};
-
-export default Object.assign(
-  {},
-  {
-    getDepartments,
-    getDepartmentById,
-  }
-);
+  getDepartmentById = (id) => {
+    return this.getDepartments().then((data) => {
+      return data.find((department) => department?.id === id);
+    });
+  };
+}

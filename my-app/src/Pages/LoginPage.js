@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import LogInComponent from "../components/login/LogInComponent";
 
-class LoginPage extends Component {
+class LogInPage extends Component {
   render() {
     return (
       <div>
-        <LogInComponent></LogInComponent>
+        <LogInComponent />
       </div>
     );
   }
 }
 
-export default LoginPage;
+export default LogInPage;

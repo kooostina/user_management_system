@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import DepartmentsService from "../services/departments.service";
-import { withRouter, Link } from "react-router-dom";
-import EmployeesList from "../components/employees/EmployeesList";
-import employeesService from "../services/employees.service";
+import { withRouter } from "react-router-dom";
 import EmployeesPage from "./EmployeesPage";
 
 class DepartmentItemPage extends Component {

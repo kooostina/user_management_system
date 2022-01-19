@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import authService from "../../services/auth.service";
 import { Redirect } from "react-router-dom";
+import { login, isAuthorized } from "../../services/auth.service";
+import constantsService from "../../constants/constants.service";
 
-class LogIn extends Component {
+export default class LogInComponent extends Component {
   state = {
-    isAuthorized: authService.isAuthorized(), // on init
+    isAuthorized: isAuthorized(), // on init
     error: null,
     isLoaded: false,
     username: "",
@@ -15,13 +16,12 @@ class LogIn extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    authService
-      .login({
-        username: this.state.username,
-        password: this.state.password,
-      })
+    login({
+      username: this.state.username,
+      password: this.state.password,
+    })
       .then((res) => {
-        this.setState({ isAuthorized: authService.isAuthorized() });
+        this.setState({ isAuthorized: isAuthorized() });
       })
       .catch((error) => {
         alert(error.message);
@@ -30,15 +30,15 @@ class LogIn extends Component {
 
   onChangeInput = (e) => {
     const name = e.target.name;
-    this.setState({ [name]: e.target.value });
+    const value = e.target.value;
+    this.setState({ [name]: value });
   };
 
   render() {
     const { isAuthorized } = this.state;
     // = const isAuthorized = this.state.isAuthorized;
-
     return isAuthorized ? (
-      <Redirect to="/departments" />
+      <Redirect to={constantsService.DEPARTMENTS} />
     ) : (
       <div className="col-md-12 d-flex justify-content-center">
         <div className="card card-container p-4">
@@ -79,5 +79,3 @@ class LogIn extends Component {
     );
   }
 }
-
-export default LogIn;

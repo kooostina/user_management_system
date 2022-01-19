@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import DepartmentsService from "../services/departments.service";
 import DepartmentsList from "../components/departments/departments_list/DepartmentsList";
+import Loader from "../components/loader/Loader";
+
+const departmentsService = new DepartmentsService();
 
 class DepartmentsPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-    };
-  }
+  state = {
+    error: null,
+    isLoaded: false,
+    items: [],
+  };
 
   initData() {
-    DepartmentsService.getDepartments()
+    departmentsService
+      .getDepartments()
       .then((result) => {
         this.setState({
           isLoaded: true,
@@ -39,15 +39,17 @@ class DepartmentsPage extends Component {
     if (error) {
       // popup & redirect to login 401 / 403
       return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return items?.length ? (
-        <DepartmentsList items={items}></DepartmentsList>
-      ) : (
-        <div>No created departments yet</div>
-      );
     }
+
+    if (!isLoaded) {
+      return <Loader />;
+    }
+
+    return !!items?.length ? (
+      <DepartmentsList items={items}></DepartmentsList>
+    ) : (
+      <div>No created departments yet</div>
+    );
   }
 }
 

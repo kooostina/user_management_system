@@ -1,22 +1,22 @@
 import React, { Component } from "react";
-import EmployeesService from "../services/employees.service";
 import EmployeesList from "../components/employees/EmployeesList";
+import Loader from "../components/loader/Loader";
+import EmployeesService from "../services/employees.service";
 
-class Employees extends Component {
-  constructor(props) {
-    super(props);
+const employeesService = new EmployeesService();
 
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-    };
-  }
+class EmployeesPage extends Component {
+  state = {
+    error: null,
+    isLoaded: false,
+    items: [],
+  };
 
   initData() {
     const departmentId = this.props.departmentId;
 
-    EmployeesService.getEmployeesByDepartmentId(departmentId)
+    employeesService
+      .getEmployeesByDepartmentId(departmentId)
       .then((result) => {
         this.setState({
           isLoaded: true,
@@ -41,16 +41,17 @@ class Employees extends Component {
     if (error) {
       // popup & redirect to login 401 / 403
       return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return items?.length ? (
-        <EmployeesList items={items}></EmployeesList>
-      ) : (
-        <div>No created departments yet</div>
-      );
     }
+
+    if (!isLoaded) {
+      return <Loader />;
+    }
+    return !!items?.length ? (
+      <EmployeesList items={items} />
+    ) : (
+      <div>No created departments yet</div>
+    );
   }
 }
 
-export default Employees;
+export default EmployeesPage;

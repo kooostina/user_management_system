@@ -1,23 +1,17 @@
 import Cookies from "universal-cookie";
+import { Component } from "react";
+
 const cookies = new Cookies();
+export default class CookieService extends Component {
+  setCookie = (key, value) => {
+    cookies.set(key, value);
+  };
 
-const setCookie = (key, value) => {
-  cookies.set(key, value);
-};
+  getCookie = (key) => {
+    return cookies.get(key);
+  };
 
-const getCookie = (key) => {
-  return cookies.get(key);
-};
-
-const removeCookie = (key) => {
-  return cookies.remove(key);
-};
-
-export default Object.assign(
-  {},
-  {
-    setCookie,
-    getCookie,
-    removeCookie,
-  }
-);
+  removeCookie = (key) => {
+    return cookies.remove(key);
+  };
+}
