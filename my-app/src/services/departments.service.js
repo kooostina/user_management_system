@@ -1,8 +1,7 @@
-import Constants from "../constants/constants.service";
+import { DEPARTMENTS, getBaseUrl } from "../constants/constants.service";
 import { getToken } from "./auth.service";
-import { Component } from "react";
 
-const baseUrl = Constants.getBaseUrl();
+const baseUrl = getBaseUrl();
 const options = {
   method: "GET",
   headers: {
@@ -10,9 +9,9 @@ const options = {
   },
 };
 
-export default class DepartmentsService extends Component {
+export default class DepartmentsService {
   getDepartments = () => {
-    return fetch(`${baseUrl}${Constants.DEPARTMENTS}`, options)
+    return fetch(`${baseUrl}${DEPARTMENTS}`, options)
       .then((res) => {
         if (!res.ok) {
           throw new Error(res.statusText);

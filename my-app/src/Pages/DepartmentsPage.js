@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import DepartmentsService from "../services/departments.service";
 import DepartmentsList from "../components/departments/departments_list/DepartmentsList";
-import Loader from "../components/loader/Loader";
 import { LoaderContext } from "../contexts/LoaderContext";
 
 const departmentsService = new DepartmentsService();

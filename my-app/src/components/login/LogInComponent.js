@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Redirect } from "react-router-dom";
 import { login, isAuthorized } from "../../services/auth.service";
-import constantsService from "../../constants/constants.service";
+import { DEPARTMENTS } from "../../constants/constants.service";
 
 export default class LogInComponent extends Component {
   state = {
@@ -35,10 +35,10 @@ export default class LogInComponent extends Component {
   };
 
   render() {
-    const { isAuthorized } = this.state;
+    const { isAuthorized, username, password } = this.state;
     // = const isAuthorized = this.state.isAuthorized;
     return isAuthorized ? (
-      <Redirect to={constantsService.DEPARTMENTS} />
+      <Redirect to={DEPARTMENTS} />
     ) : (
       <div className="col-md-12 d-flex justify-content-center">
         <div className="card card-container p-4">
@@ -51,7 +51,7 @@ export default class LogInComponent extends Component {
                 placeholder="username"
                 name="username"
                 required
-                value={this.state.username}
+                value={username}
                 className="form-control"
                 onChange={this.onChangeInput} //make a separate function
               />
@@ -63,7 +63,7 @@ export default class LogInComponent extends Component {
                 placeholder="password"
                 name="password"
                 required
-                value={this.state.password}
+                value={password}
                 className="form-control"
                 onChange={this.onChangeInput}
               />

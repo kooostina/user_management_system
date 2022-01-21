@@ -6,7 +6,7 @@ class DepartmentItemPage extends Component {
   render() {
     const departmentId = this.props.match.params.departmentId;
 
-    return <EmployeesPage departmentId={departmentId}></EmployeesPage>;
+    return <EmployeesPage departmentId={departmentId} />;
   }
 }
 

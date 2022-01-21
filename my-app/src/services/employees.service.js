@@ -1,8 +1,7 @@
-import Constants from "../constants/constants.service";
+import { getBaseUrl } from "../constants/constants.service";
 import { getToken } from "./auth.service";
-import { Component } from "react";
 
-const baseUrl = Constants.getBaseUrl();
+const baseUrl = getBaseUrl();
 const options = {
   method: "GET",
   headers: {
@@ -10,7 +9,7 @@ const options = {
   },
 };
 
-export default class EmployeesService extends Component {
+export default class EmployeesService {
   getEmployees = () => {
     return fetch(`${baseUrl}/employees`, options)
       .then((res) => {

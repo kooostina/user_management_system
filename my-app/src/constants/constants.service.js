@@ -14,14 +14,11 @@ const generateEmployeesUrl = (segment, departmentId) => {
   return `${segment}/${departmentId}/employees`;
 };
 
-export default Object.assign(
-  {},
-  {
-    HOST,
-    getBaseUrl,
-    generateEmployeesUrl,
-    USER_TOKEN,
-    DEPARTMENTS,
-    LOGIN,
-  }
-);
+export {
+  HOST,
+  getBaseUrl,
+  generateEmployeesUrl,
+  USER_TOKEN,
+  DEPARTMENTS,
+  LOGIN,
+};

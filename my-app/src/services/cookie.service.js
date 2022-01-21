@@ -1,8 +1,8 @@
 import Cookies from "universal-cookie";
-import { Component } from "react";
 
 const cookies = new Cookies();
-export default class CookieService extends Component {
+
+export default class CookieService {
   setCookie = (key, value) => {
     cookies.set(key, value);
   };

@@ -1,7 +1,7 @@
-import Constants from "../constants/constants.service";
+import { USER_TOKEN, getBaseUrl } from "../constants/constants.service";
 import CookieService from "./cookie.service";
 
-const baseUrl = Constants.getBaseUrl();
+const baseUrl = getBaseUrl();
 const cookieService = new CookieService();
 
 const login = (data) => {
@@ -23,13 +23,13 @@ const login = (data) => {
     })
     .then((res) => {
       // save to cookie
-      cookieService.setCookie(Constants.USER_TOKEN, res.USERTOKEN);
+      cookieService.setCookie(USER_TOKEN, res.USERTOKEN);
       return res;
     });
 };
 
 const getToken = () => {
-  return cookieService.getCookie(Constants.USER_TOKEN);
+  return cookieService.getCookie(USER_TOKEN);
 };
 
 const isAuthorized = () => {
@@ -37,7 +37,7 @@ const isAuthorized = () => {
 };
 
 const logOut = () => {
-  cookieService.removeCookie(Constants.USER_TOKEN);
+  cookieService.removeCookie(USER_TOKEN);
 };
 
 export { login, isAuthorized, logOut, getToken };
