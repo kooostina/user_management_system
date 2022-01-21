@@ -49,7 +49,7 @@ class EmployeesPage extends Component {
     return !!items?.length ? (
       <EmployeesList items={items} />
     ) : (
-      <div>No created departments yet</div>
+      <div>No created employees yet</div>
     );
   }
 }

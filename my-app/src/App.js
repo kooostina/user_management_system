@@ -2,11 +2,8 @@ import "./App.css";
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ProtectedRoute from "./Pages/ProtectedRoute";
-import DepartmentsPage from "./Pages/DepartmentsPage";
-import ErrorPage from "./Pages/ErrorPage";
-import DepartmentItemPage from "./Pages/DepartmentItemPage";
-import LogInPage from "./Pages/LoginPage";
 import { publicRoutes, protectedRoutes } from "./constants/routes";
+import LoaderContextProvider from "./contexts/LoaderContext";
 
 class App extends Component {
   render() {
@@ -26,7 +23,9 @@ class App extends Component {
             <h2>User Management System</h2>
           </div>
 
-          <Switch>{[...routes]}/</Switch>
+          <LoaderContextProvider>
+            <Switch>{[...routes]}/</Switch>
+          </LoaderContextProvider>
         </div>
       </Router>
     );

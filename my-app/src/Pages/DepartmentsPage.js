@@ -2,31 +2,30 @@ import React, { Component } from "react";
 import DepartmentsService from "../services/departments.service";
 import DepartmentsList from "../components/departments/departments_list/DepartmentsList";
 import Loader from "../components/loader/Loader";
+import { LoaderContext } from "../contexts/LoaderContext";
 
 const departmentsService = new DepartmentsService();
 
 class DepartmentsPage extends Component {
+  static contextType = LoaderContext;
+
   state = {
     error: null,
-    isLoaded: false,
     items: [],
   };
 
   initData() {
+    this.context.handleToggleLoader();
+
     departmentsService
       .getDepartments()
       .then((result) => {
-        this.setState({
-          isLoaded: true,
-          items: result,
-        });
+        this.setState({ items: result });
       })
       .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
-      });
+        this.setState({ error });
+      })
+      .finally(this.context.handleToggleLoader);
   }
 
   componentDidMount() {
@@ -34,22 +33,18 @@ class DepartmentsPage extends Component {
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, items } = this.state;
 
     if (error) {
       // popup & redirect to login 401 / 403
       return <div>Error: {error.message}</div>;
     }
 
-    if (!isLoaded) {
-      return <Loader />;
+    if (!this.context.isLoaded && !this.state.items.length) {
+      return <div>No created departments yet</div>;
     }
 
-    return !!items?.length ? (
-      <DepartmentsList items={items}></DepartmentsList>
-    ) : (
-      <div>No created departments yet</div>
-    );
+    return <DepartmentsList items={items} />;
   }
 }
 
