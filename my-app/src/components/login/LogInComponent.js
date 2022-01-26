@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Redirect } from "react-router-dom";
-import { login, isAuthorized } from "../../services/auth.service";
+import { Redirect, withRouter } from "react-router-dom";
+import { login } from "../../services/auth.service";
+import CookieService from "../../services/cookie.service";
 import { DEPARTMENTS } from "../../constants/constants.service";
 
-export default class LogInComponent extends Component {
+const cookieService = new CookieService();
+
+class LogInComponent extends Component {
   state = {
-    isAuthorized: isAuthorized(), // on init
+    isAuthorized: false,
     error: null,
     isLoaded: false,
     username: "",
@@ -21,7 +24,10 @@ export default class LogInComponent extends Component {
       password: this.state.password,
     })
       .then((res) => {
-        this.setState({ isAuthorized: isAuthorized() });
+        if (res.USERTOKEN) {
+          cookieService.setCookie("token", res.USER_TOKEN);
+          this.props.history.push(DEPARTMENTS); // метод редиректа с функции
+        }
       })
       .catch((error) => {
         alert(error.message);
@@ -35,11 +41,9 @@ export default class LogInComponent extends Component {
   };
 
   render() {
-    const { isAuthorized, username, password } = this.state;
-    // = const isAuthorized = this.state.isAuthorized;
-    return isAuthorized ? (
-      <Redirect to={DEPARTMENTS} />
-    ) : (
+    const { username, password } = this.state;
+
+    return (
       <div className="col-md-12 d-flex justify-content-center">
         <div className="card card-container p-4">
           <h1>Please Log In</h1>
@@ -79,3 +83,5 @@ export default class LogInComponent extends Component {
     );
   }
 }
+
+export default withRouter(LogInComponent);

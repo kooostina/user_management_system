@@ -1,4 +1,6 @@
+// import "./App.css";
 import "./App.css";
+import "./Style_variables/Variables.css";
 import React, { Component } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ProtectedRoute from "./Pages/ProtectedRoute";
@@ -20,7 +22,7 @@ class App extends Component {
       <Router>
         <div>
           <div>
-            <h2>User Management System</h2>
+            <h2 className="logo">User Management System</h2>
           </div>
 
           <LoaderContextProvider>

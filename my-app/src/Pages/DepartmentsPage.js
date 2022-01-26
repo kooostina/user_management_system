@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DepartmentsService from "../services/departments.service";
 import DepartmentsList from "../components/departments/departments_list/DepartmentsList";
 import { LoaderContext } from "../contexts/LoaderContext";
+import withAbsenceItems from "../hocs/withAbsenceItems";
 
 const departmentsService = new DepartmentsService();
 
@@ -9,7 +10,7 @@ class DepartmentsPage extends Component {
   static contextType = LoaderContext;
 
   state = {
-    error: null,
+    // error: null,
     items: [],
   };
 
@@ -19,10 +20,15 @@ class DepartmentsPage extends Component {
     departmentsService
       .getDepartments()
       .then((result) => {
-        this.setState({ items: result });
+        if (!!result.length) {
+          this.setState({ items: result });
+        } else {
+          console.log(this.props.setMessage);
+          this.props.setMessage("departments");
+        }
       })
       .catch((error) => {
-        this.setState({ error });
+        this.context.setError(error);
       })
       .finally(this.context.handleToggleLoader);
   }
@@ -32,19 +38,15 @@ class DepartmentsPage extends Component {
   }
 
   render() {
-    const { error, items } = this.state;
+    console.log(this.context);
+    const { items } = this.state;
 
-    if (error) {
-      // popup & redirect to login 401 / 403
-      return <div>Error: {error.message}</div>;
-    }
-
-    if (!this.context.isLoaded && !this.state.items.length) {
-      return <div>No created departments yet</div>;
-    }
+    // if (!this.context.isLoaded && !this.state.items.length) {
+    //   return <div>No created departments yet</div>;
+    // }
 
     return <DepartmentsList items={items} />;
   }
 }
 
-export default DepartmentsPage;
+export default withAbsenceItems(DepartmentsPage);

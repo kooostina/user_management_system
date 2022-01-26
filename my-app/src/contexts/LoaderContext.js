@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import Loader from "../components/loader/Loader";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const LoaderContext = React.createContext();
 
 export default class LoaderContextProvider extends Component {
   state = {
     isLoaded: false,
-    error: "",
-  };
-
-  setLoaded = () => {
-    this.setState({ isLoaded: true });
-  };
-
-  setLoading = () => {
-    this.setState({ isLoaded: false });
+    error: null,
   };
 
   handleToggleLoader = () => {
@@ -24,16 +17,23 @@ export default class LoaderContextProvider extends Component {
     }));
   };
 
+  setError = (error) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      error: error.message,
+    }));
+  };
+
   render() {
     return (
       <LoaderContext.Provider
         value={{
           isLoaded: this.state.isLoaded,
-          setLoaded: () => this.setLoaded(),
-          setLoading: () => this.setLoading(),
           handleToggleLoader: this.handleToggleLoader,
+          setError: this.setError,
         }}
       >
+        {this.state.error && <ErrorPage />}
         {this.state.isLoaded && <Loader />}
         {this.props.children}
       </LoaderContext.Provider>
