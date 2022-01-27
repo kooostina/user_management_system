@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import EmployeesList from "../components/employees/EmployeesList";
 import EmployeesService from "../services/employees.service";
 import { LoaderContext } from "../contexts/LoaderContext";
+import withAbsenceItems from "../hocs/withAbsenceItems";
 
 const employeesService = new EmployeesService();
 
@@ -18,12 +19,14 @@ class EmployeesPage extends Component {
     employeesService
       .getEmployeesByDepartmentId(departmentId)
       .then((result) => {
-        this.setState({
-          items: result,
-        });
+        if (!!result.length) {
+          this.setState({ items: result });
+        } else {
+          this.props.setMessage("employees");
+        }
       })
       .catch((error) => {
-        // this.context.setError(error);
+        this.context.setError(error);
       })
       .finally(this.context.handleToggleLoader);
   }
@@ -35,12 +38,8 @@ class EmployeesPage extends Component {
   render() {
     const { items } = this.state;
 
-    if (!this.context.isLoaded && !this.state.items.length) {
-      return <div>No created employees yet</div>;
-    }
-
     return <EmployeesList items={items} />;
   }
 }
 
-export default EmployeesPage;
+export default withAbsenceItems(EmployeesPage);

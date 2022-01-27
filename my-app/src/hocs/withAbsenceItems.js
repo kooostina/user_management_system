@@ -15,7 +15,6 @@ const withAbsenceItems = (WrappedComponent) => {
     };
 
     render() {
-      console.log(this.state);
       return (
         <div>
           {this.state.message && <div>{this.state.message}</div>}

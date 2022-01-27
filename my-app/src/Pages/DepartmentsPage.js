@@ -10,7 +10,6 @@ class DepartmentsPage extends Component {
   static contextType = LoaderContext;
 
   state = {
-    // error: null,
     items: [],
   };
 
@@ -23,7 +22,6 @@ class DepartmentsPage extends Component {
         if (!!result.length) {
           this.setState({ items: result });
         } else {
-          console.log(this.props.setMessage);
           this.props.setMessage("departments");
         }
       })
@@ -38,12 +36,7 @@ class DepartmentsPage extends Component {
   }
 
   render() {
-    console.log(this.context);
     const { items } = this.state;
-
-    // if (!this.context.isLoaded && !this.state.items.length) {
-    //   return <div>No created departments yet</div>;
-    // }
 
     return <DepartmentsList items={items} />;
   }
