@@ -1,10 +1,20 @@
+// import "./App.css";
 import "./App.css";
+import "./Style_variables/Variables.css";
 import React, { Component } from "react";
-import LogIn from "./Pages/LogIn";
-import Employees from "./Pages/Employees";
-import Departments from "./Pages/Departments";
-import Error from "./Pages/Error";
-import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ProtectedRoute from "./Pages/ProtectedRoute";
+import { publicRoutes, protectedRoutes } from "./constants/routes";
+import LoaderContextProvider from "./contexts/LoaderContext";
+
+const routes = [
+  ...protectedRoutes.map((route, i) => {
+    return <ProtectedRoute {...route} key={i} />;
+  }),
+  ...publicRoutes.map((route, i) => {
+    return <Route {...route} key={i} />;
+  }),
+];
 
 class App extends Component {
   render() {
@@ -12,15 +22,12 @@ class App extends Component {
       <Router>
         <div>
           <div>
-            <h2>User Management System</h2>
+            <h2 className="logo">User Management System</h2>
           </div>
 
-          <Switch>
-            <Route path="/" exact component={LogIn} />
-            <Route path="/departments" component={Departments} />
-            <Route path="/employees" component={Employees} />
-            <Route path="/error" component={Error} />
-          </Switch>
+          <LoaderContextProvider>
+            <Switch>{[...routes]}/</Switch>
+          </LoaderContextProvider>
         </div>
       </Router>
     );
