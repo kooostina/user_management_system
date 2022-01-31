@@ -1,0 +1,18 @@
+@import "./Variables.css";
+
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-img {
+  width: 800px;
+}
+
+.home-link {
+  text-decoration: none;
+  color: var(--link-color);
+  font-size: 2rem;
+  font-weight: 700;
+}
