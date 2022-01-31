@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { login } from "../../services/auth.service";
 import CookieService from "../../services/cookie.service";
 import { DEPARTMENTS } from "../../constants/constants.service";
+import "../../styles/LogInComponent.css";
 
 const cookieService = new CookieService();
 
@@ -44,41 +44,42 @@ class LogInComponent extends Component {
     const { username, password } = this.state;
 
     return (
-      <div className="col-md-12 d-flex justify-content-center">
-        <div className="card card-container p-4">
-          <h1>Please Log In</h1>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                placeholder="username"
-                name="username"
-                required
-                value={username}
-                className="form-control"
-                onChange={this.onChangeInput} //make a separate function
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                placeholder="password"
-                name="password"
-                required
-                value={password}
-                className="form-control"
-                onChange={this.onChangeInput}
-              />
-            </div>
-            <div>
-              <button type="submit" className="btn btn-primary btn-block">
-                Log in
-              </button>
-            </div>
-          </form>
+      <div className="col-md-6 offset-md-3">
+        <div className="text-center">
+          <h1 className="text-secondary">Welcome</h1>
+          <p>Log in by entering the information below</p>
         </div>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group mb-3">
+            {/* <label htmlFor="username">Username</label> */}
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              required
+              value={username}
+              className="form-control"
+              onChange={this.onChangeInput} //make a separate function
+            />
+          </div>
+          <div className="form-group mb-3">
+            {/* <label htmlFor="password">Password</label> */}
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              value={password}
+              className="form-control"
+              onChange={this.onChangeInput}
+            />
+          </div>
+          <div>
+            <button type="submit" className="btn login-button px-5 mb-5 w-100">
+              Get started
+            </button>
+          </div>
+        </form>
       </div>
     );
   }

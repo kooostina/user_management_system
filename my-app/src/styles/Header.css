@@ -1,0 +1,17 @@
+@import "./Variables.css";
+
+.logo {
+  color: var(--primarycolor);
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--primarycolor);
+}
+
+.login-link {
+  color: grey;
+  text-decoration: none;
+}

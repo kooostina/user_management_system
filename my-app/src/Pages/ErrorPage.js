@@ -7,7 +7,8 @@ class Error extends Component {
     return (
       <div>
         <div>
-          <h2>404 Not Found</h2>
+          <img alt="Old lady with a mop" src="old_lady.jpg"></img>
+          <h2>Not found</h2>
           <Link to={LOGIN}>Go to Home</Link>
         </div>
       </div>

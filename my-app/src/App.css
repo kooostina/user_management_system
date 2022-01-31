@@ -36,9 +36,3 @@
     transform: rotate(360deg);
   }
 } */
-
-@import "./Style_variables/Variables.css";
-
-.logo {
-  color: var(--primarycolor);
-}
