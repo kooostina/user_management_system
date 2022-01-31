@@ -1,0 +1,11 @@
+@import "./Variables.css";
+
+.login-button {
+  background-color: var(--primarycolor);
+  color: white;
+}
+
+.login-button:hover {
+  background-color: white;
+  border-color: var(--primarycolor);
+}
